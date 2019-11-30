@@ -35,7 +35,7 @@
 
 - (id) initWithLib: (tr_session *) lib;
 
-- (void) updateBadgeWithDownload: (CGFloat) downloadRate upload: (CGFloat) uploadRate;
+- (void) updateBadgeWithDownload: (CGFloat) downloadRate upload: (CGFloat) uploadRate progress: (CGFloat) progress;
 - (void) addCompletedTorrent: (Torrent *) torrent;
 - (void) removeTorrent: (Torrent *) torrent;
 - (void) clearCompleted;

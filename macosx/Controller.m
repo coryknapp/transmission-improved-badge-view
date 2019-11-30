@@ -1870,7 +1870,13 @@ static void removeKeRangerRansomware()
     }
 
     //badge dock
-    [fBadger updateBadgeWithDownload: dlRate upload: ulRate];
+    
+    GLfloat progress = 0.0;
+    if([[self selectedTorrents] count] == 1){
+        progress = [(Torrent *)[[self selectedTorrents] firstObject] progress];
+    }
+    
+    [fBadger updateBadgeWithDownload: dlRate upload: ulRate progress: progress];
 }
 
 #warning can this be removed or refined?

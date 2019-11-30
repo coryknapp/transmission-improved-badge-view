@@ -43,7 +43,7 @@
 }
 
 
-- (void) updateBadgeWithDownload: (CGFloat) downloadRate upload: (CGFloat) uploadRate
+- (void) updateBadgeWithDownload: (CGFloat) downloadRate upload: (CGFloat) uploadRate progress: (CGFloat) progress
 {
     const CGFloat displayDlRate = [[NSUserDefaults standardUserDefaults] boolForKey: @"BadgeDownloadRate"]
                                     ? downloadRate : 0.0;
@@ -51,8 +51,9 @@
                                     ? uploadRate : 0.0;
 
     //only update if the badged values change
-    if ([(BadgeView *)[[NSApp dockTile] contentView] setRatesWithDownload: displayDlRate upload: displayUlRate])
+    if ( [(BadgeView *)[[NSApp dockTile] contentView] setRatesWithDownload: displayDlRate upload: displayUlRate progress: progress] ){
         [[NSApp dockTile] display];
+    }
 }
 
 - (void) addCompletedTorrent: (Torrent *) torrent

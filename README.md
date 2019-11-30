@@ -1,5 +1,7 @@
 ## About
 
+> This fork adds a badge to the dock icon that displays the percent complete of the torrent currently selected in main window.
+
 Transmission is a fast, easy, and free BitTorrent client. It comes in several flavors:
   * A native Mac OS X GUI application
   * GTK+ and Qt GUI applications for Linux, BSD, etc.

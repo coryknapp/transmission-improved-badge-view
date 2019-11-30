@@ -31,12 +31,13 @@
     NSMutableDictionary * fAttributes;
 
     CGFloat fDownloadRate, fUploadRate;
+    CGFloat fProgress;
     BOOL fQuitting;
 }
 
 - (id) initWithLib: (tr_session *) lib;
 
-- (BOOL) setRatesWithDownload: (CGFloat) downloadRate upload: (CGFloat) uploadRate;
+- (BOOL) setRatesWithDownload: (CGFloat) downloadRate upload: (CGFloat) uploadRate progress: (CGFloat) progress;
 - (void) setQuitting;
 
 @end

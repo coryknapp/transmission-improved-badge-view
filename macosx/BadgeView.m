@@ -41,20 +41,22 @@
 
         fDownloadRate = 0.0;
         fUploadRate = 0.0;
+        
         fQuitting = NO;
     }
     return self;
 }
 
 
-- (BOOL) setRatesWithDownload: (CGFloat) downloadRate upload: (CGFloat) uploadRate
+- (BOOL) setRatesWithDownload: (CGFloat) downloadRate upload: (CGFloat) uploadRate progress: (CGFloat) progress
 {
     //only needs update if the badges were displayed or are displayed now
-    if (fDownloadRate == downloadRate && fUploadRate == uploadRate)
+    if (fDownloadRate == downloadRate && fUploadRate == uploadRate && fProgress == progress)
         return NO;
 
     fDownloadRate = downloadRate;
     fUploadRate = uploadRate;
+    fProgress = progress;
     return YES;
 }
 
@@ -76,7 +78,8 @@
     }
 
     const BOOL upload = fUploadRate >= 0.1,
-            download = fDownloadRate >= 0.1;
+            download = fDownloadRate >= 0.1,
+            progress = fProgress >= 0.01;
     CGFloat bottom = 0.0;
     if (upload)
     {
@@ -85,9 +88,15 @@
         if (download)
             bottom += [uploadBadge size].height + BETWEEN_PADDING; //download rate above upload rate
     }
-    if (download)
-        [self badge: [NSImage imageNamed: @"DownloadBadge"] string: [NSString stringForSpeedAbbrev: fDownloadRate]
+    if (download){
+        NSImage * downloadBadge = [NSImage imageNamed: @"DownloadBadge"];
+        [self badge: downloadBadge string: [NSString stringForSpeedAbbrev: fDownloadRate]
                 atHeight: bottom adjustForQuit: NO];
+        bottom += [downloadBadge size].height + BETWEEN_PADDING; //download rate above upload rate
+    }
+    if(progress)
+        [self badge: [NSImage imageNamed: @"UploadBadge"] string: [NSString stringWithFormat: @"%d%%", (int)(fProgress * 100)]
+            atHeight: bottom adjustForQuit: NO];
 }
 
 @end
